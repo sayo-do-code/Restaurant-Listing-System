@@ -1,0 +1,28 @@
+.custom-container {
+    max-width: 700px !important; /* Adjust this value as needed */
+    /* height: 50px !important; */
+    /* margin-right: 75px!important; */
+    margin-left: 280px!important;
+    margin-top: 75px!important;
+  }
+
+  .shadow-sm {
+    /* background-color: #387b87; */
+    /* background-color: #5e8ac2; */
+    /* padding: 20px 15px; */
+    margin-top: 15px;
+    border-radius: 5px;
+    /* border: 1px solid #5e8ac2!important; */
+    /* color: #5e8ac2; */
+    border: 1px solid #374e52!important;
+    /* color: #365459; */
+    color: #638990;
+  }
+
+  .CountBoard {
+    /* color: #5e8ac2; */
+    color: #638990;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  

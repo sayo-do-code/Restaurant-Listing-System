@@ -1,0 +1,28 @@
+.enr_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Align cards to the left */
+  }
+  
+  .enr_card {
+    border: 1px solid #385262;
+    padding: 15px;
+    margin-top: 40px;
+    margin-left: 35px;
+    width: 245px;
+    text-align: center;
+    border-radius: 4px;
+  }
+  
+  .enr_btn {
+    margin: 5px;
+  }
+  
+  .enr_no-request {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 150px;
+    color: #385262;
+    margin-left: 500px;
+  }
+  

@@ -1,0 +1,894 @@
+// one that worked for backup
+// import axios from "axios";
+// import React, { useState, useRef, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import Flatpickr from "react-flatpickr";
+// import "flatpickr/dist/themes/light.css";
+// import "./addrestaurant.css";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+// import L from "leaflet";
+// import "leaflet/dist/leaflet.css";
+
+// function AddRestaurant() {
+//   const [data, setData] = useState({
+//     name: "",
+//     email: "",
+//     password: "",
+//     location: "",
+//     phone: "",
+//     openingTime: "",
+//     closingTime: "",
+//     image: "",
+//     menuImages: [],
+//     description: "",
+//     latitude: 27.7172,
+//     longitude: 85.324,
+//   });
+
+//   const navigate = useNavigate();
+//   const mapContainerRef = useRef(null);
+//   const markerRef = useRef(null);
+//   const mapRef = useRef(null);
+
+//   useEffect(() => {
+//     let map = null;
+//     let marker = null;
+
+//     const initializeMap = () => {
+//       if (!map) {
+//         map = L.map(mapContainerRef.current).setView(
+//           [data.latitude, data.longitude],
+//           12
+//         );
+
+//         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+//           attribution: "&copy; OpenStreetMap contributors",
+//         }).addTo(map);
+
+//         map.on("click", handleMapClick);
+//         mapRef.current = map;
+
+//         // Show the marker on initial load
+//         if (data.latitude && data.longitude) {
+//           marker = L.marker([data.latitude, data.longitude]).addTo(map);
+//           marker.bindPopup("Restaurant location").openPopup();
+//           markerRef.current = marker;
+//         }
+//       }
+//     };
+
+//     const handleMapClick = (event) => {
+//       const { lat, lng } = event.latlng;
+
+//       setData({
+//         ...data,
+//         latitude: lat,
+//         longitude: lng,
+//       });
+
+//       if (marker) {
+//         map.removeLayer(marker);
+//       }
+
+//       // Add a marker to the map at the clicked location
+//       marker = L.marker([lat, lng]).addTo(map);
+//       marker.bindPopup("Your restaurant location").openPopup();
+
+//       // Update the marker reference
+//       markerRef.current = marker;
+//     };
+
+//     initializeMap();
+
+//     return () => {
+//       if (map) {
+//         map.off();
+//         map.remove();
+//       }
+//     };
+//   }, [data]);
+
+//   // code with  marker and save data in database.
+//   // useEffect(() => {
+//   //   let map;
+//   //   let marker;
+
+//   //   const initializeMap = () => {
+//   //     if (!map) {
+//   //       map = L.map(mapContainerRef.current).setView(
+//   //         [data.latitude, data.longitude],
+//   //         12
+//   //       );
+
+//   //       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+//   //         attribution: "&copy; OpenStreetMap contributors",
+//   //       }).addTo(map);
+
+//   //       map.on("click", handleMapClick);
+//   //       mapRef.current = map;
+
+//   //       // Show the marker on initial load
+//   //       marker = L.marker([data.latitude, data.longitude]).addTo(map);
+//   //       marker.bindPopup("Your restaurant location").openPopup();
+//   //       markerRef.current = marker;
+//   //     }
+//   //   };
+
+//   //   const handleMapClick = (event) => {
+//   //     const { lat, lng } = event.latlng;
+
+//   //     setData({
+//   //       ...data,
+//   //       latitude: lat,
+//   //       longitude: lng,
+//   //     });
+
+//   //     if (marker) {
+//   //       map.removeLayer(marker);
+//   //     }
+
+//   //     // Add a marker to the map at the clicked location
+//   //     marker = L.marker([lat, lng]).addTo(map);
+//   //     marker.bindPopup("Your restaurant location").openPopup();
+
+//   //     // Update the marker reference
+//   //     markerRef.current = marker;
+//   //   };
+
+//   //   initializeMap();
+
+//   //   return () => {
+//   //     if (map) {
+//   //       map.off();
+//   //       map.remove();
+//   //     }
+//   //   };
+//   // }, [data]);
+
+//   // marker but submit error
+//   // useEffect(() => {
+//   //   let map;
+//   //   let marker;
+
+//   //   const initializeMap = () => {
+//   //     if (!map) {
+//   //       map = L.map(mapContainerRef.current).setView([27.7172, 85.324], 12);
+
+//   //       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+//   //         attribution: "&copy; OpenStreetMap contributors",
+//   //       }).addTo(map);
+
+//   //       map.on("click", handleMapClick);
+//   //       mapRef.current = map;
+//   //     }
+//   //   };
+
+//   //   const handleMapClick = (event) => {
+//   //     const { lat, lng } = event.latlng;
+//   //     console.log("Clicked coordinates:", [lat, lng]);
+
+//   //     // Update the latitude and longitude in the state
+//   //     setData({
+//   //       ...data,
+//   //       latitude: lat,
+//   //       longitude: lng,
+//   //     });
+
+//   //     // Remove previous marker if any
+//   //     if (marker) {
+//   //       mapRef.current.removeLayer(marker);
+//   //     }
+
+//   //     // Add a marker to the map at the clicked location
+//   //     marker = L.marker([lat, lng]).addTo(mapRef.current);
+
+//   //     // Add a popup to the marker
+//   //     marker.bindPopup("Your restaurant location").openPopup();
+//   //   };
+
+//   //   initializeMap();
+
+//   //   return () => {
+//   //     // Clean up the map when the component is unmounted
+//   //     if (map) {
+//   //       map.off();
+//   //       map.remove();
+//   //     }
+//   //   };
+//   // }, []);
+
+//   // no marker
+//   // useEffect(() => {
+//   //   let map;
+
+//   //   const initializeMap = () => {
+//   //     try {
+//   //       if (!map) {
+//   //         map = L.map(mapContainerRef.current).setView(
+//   //           [data.latitude, data.longitude],
+//   //           12
+//   //         );
+
+//   //         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+//   //           attribution: "&copy; OpenStreetMap contributors",
+//   //         }).addTo(map);
+
+//   //         // Inside the initializeMap function
+//   //         // Inside the initializeMap function
+//   //         // Inside the initializeMap function
+//   //         const handleMapClick = (event) => {
+//   //           const { lat, lng } = event.latlng;
+
+//   //           setData({
+//   //             ...data,
+//   //             latitude: lat,
+//   //             longitude: lng,
+//   //           });
+
+//   //           if (markerRef.current) {
+//   //             map.removeLayer(markerRef.current);
+//   //           }
+
+//   //           const marker = L.marker([lat, lng]).addTo(map);
+//   //           marker.bindPopup("Your restaurant location").openPopup();
+
+//   //           markerRef.current = marker;
+//   //         };
+
+//   //         map.on("click", handleMapClick);
+//   //       }
+//   //     } catch (error) {
+//   //       console.error("Error initializing map:", error);
+//   //     }
+//   //   };
+
+//   //   initializeMap();
+
+//   //   return () => {
+//   //     if (map) {
+//   //       map.off();
+//   //       map.remove();
+//   //     }
+//   //   };
+//   // }, [data]);
+
+//   const showNotification = (message, type) => {
+//     toast(message, { type });
+//   };
+
+//   const handleSubmit = (event) => {
+//     event.preventDefault();
+
+//     const restaurantData = {
+//       name: data.name,
+//       email: data.email,
+//       password: data.password,
+//       location: data.location,
+//       phone: data.phone,
+//       openingTime: data.openingTime,
+//       closingTime: data.closingTime,
+//       description: data.description,
+//       latitude: data.latitude,
+//       longitude: data.longitude,
+//     };
+
+//     const formdata = new FormData();
+//     formdata.append("image", data.image);
+
+//     for (let i = 0; i < data.menuImages.length; i++) {
+//       formdata.append("menuImages", data.menuImages[i]);
+//     }
+
+//     axios
+//       .post("http://localhost:5000/uploadImage", formdata)
+//       .then((res) => {
+//         restaurantData.image = res.data.filename;
+//         restaurantData.menu = res.data.menuFilenames;
+//         return axios.post("http://localhost:5000/create", restaurantData);
+//       })
+//       .then((res) => {
+//         showNotification("Restaurant added successfully!", "success");
+//         setTimeout(() => {
+//           navigate("/dashboard/restaurant");
+//         }, 3500);
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//         showNotification(
+//           "Failed to add restaurant. Please try again.",
+//           "error"
+//         );
+//       });
+//   };
+
+//   return (
+//     <div className="d-flex flex-column align-items-center pt-4">
+//       <h5>Add Restaurant</h5>
+//       <form className="row g-3 w-50" onSubmit={handleSubmit}>
+//         <div className="col-12">
+//           <label htmlFor="inputName" className="form-label">
+//             Name
+//           </label>
+//           <input
+//             type="text"
+//             className="form-control"
+//             id="inputName"
+//             placeholder="Enter Name"
+//             autoComplete="off"
+//             required
+//             onChange={(e) => setData({ ...data, name: e.target.value })}
+//           />
+//         </div>
+//         <div className="col-12">
+//           <label htmlFor="inputEmail4" className="form-label">
+//             Email
+//           </label>
+//           <input
+//             type="email"
+//             className="form-control"
+//             id="inputEmail4"
+//             placeholder="Enter Email"
+//             autoComplete="off"
+//             required
+//             onChange={(e) => setData({ ...data, email: e.target.value })}
+//           />
+//         </div>
+//         <div className="col-12">
+//           <label htmlFor="inputPassword4" className="form-label">
+//             Password
+//           </label>
+//           <input
+//             type="password"
+//             className="form-control"
+//             id="inputPassword4"
+//             placeholder="Enter Password"
+//             required
+//             onChange={(e) => setData({ ...data, password: e.target.value })}
+//           />
+//         </div>
+//         <div className="col-12">
+//           <label htmlFor="inputLocation" className="form-label">
+//             Location
+//           </label>
+//           <input
+//             type="text"
+//             className="form-control"
+//             id="Location"
+//             placeholder="Enter Location"
+//             autoComplete="off"
+//             required
+//             onChange={(e) => setData({ ...data, location: e.target.value })}
+//           />
+//         </div>
+//         <div className="col-12">
+//           <label htmlFor="inputPhoneNumber" className="form-label">
+//             Phone Number
+//           </label>
+//           <input
+//             type="text"
+//             className="form-control"
+//             id="inputPhoneNumber"
+//             placeholder="Enter Phone Number"
+//             autoComplete="off"
+//             required
+//             onChange={(e) => setData({ ...data, phone: e.target.value })}
+//           />
+//         </div>
+//         <div className="col-12">
+//           <div className="row">
+//             <div className="col">
+//               <label htmlFor="inputTime" className="form-label">
+//                 Opening Time
+//               </label>
+//               <Flatpickr
+//                 className="mx-2"
+//                 value={data.openingTime}
+//                 options={{
+//                   enableTime: true,
+//                   noCalendar: true,
+//                   dateFormat: "H:i",
+//                 }}
+//                 onChange={(newValue) =>
+//                   setData({
+//                     ...data,
+//                     openingTime: newValue[0].toLocaleTimeString("en-US", {
+//                       hour12: false,
+//                       hour: "2-digit",
+//                       minute: "2-digit",
+//                     }),
+//                   })
+//                 }
+//                 required
+//               />
+//             </div>
+
+//             <div className="col">
+//               <label htmlFor="inputClosingTime" className="form-label">
+//                 Closing Time
+//               </label>
+//               <Flatpickr
+//                 className="mx-2"
+//                 value={data.closingTime}
+//                 options={{
+//                   enableTime: true,
+//                   noCalendar: true,
+//                   dateFormat: "H:i",
+//                 }}
+//                 onChange={(newValue) =>
+//                   setData({
+//                     ...data,
+//                     closingTime: newValue[0].toLocaleTimeString("en-US", {
+//                       hour12: false,
+//                       hour: "2-digit",
+//                       minute: "2-digit",
+//                     }),
+//                   })
+//                 }
+//                 required
+//               />
+//             </div>
+//           </div>
+//         </div>
+
+//         <div className="col-12 mb-3">
+//           <label className="form-label" htmlFor="inputGroupFile01">
+//             Select Profile Image
+//           </label>
+//           <input
+//             type="file"
+//             className="form-control"
+//             id="inputGroupFile01"
+//             onChange={(e) => setData({ ...data, image: e.target.files[0] })}
+//           />
+//         </div>
+//         <div className="col-12 mb-3">
+//           <label className="form-label" htmlFor="inputMenuFile">
+//             Upload Menu Images (Less than 7 images)
+//           </label>
+//           <input
+//             type="file"
+//             multiple
+//             className="form-control"
+//             id="inputMenuImages"
+//             onChange={(e) => setData({ ...data, menuImages: e.target.files })}
+//           />
+//         </div>
+
+//         <div className="col-12">
+//           <label htmlFor="inputDescription" className="form-label">
+//             Description
+//           </label>
+//           <textarea
+//             className="form-control"
+//             id="inputDescription"
+//             placeholder="Enter Description"
+//             rows="8" // Adjust the number of rows as needed
+//             autoComplete="off"
+//             required
+//             onChange={(e) => setData({ ...data, description: e.target.value })}
+//           />
+//         </div>
+//         <div className="col-12">
+//           <div
+//             id="leaflet-map"
+//             ref={mapContainerRef}
+//             style={{ width: "100%", height: "300px", marginTop: "20px" }}
+//           />
+//         </div>
+//         <div className="col-12">
+//           <button type="submit" className="btn btn-primary mb-4">
+//             Add
+//           </button>
+//         </div>
+//       </form>
+//       <ToastContainer
+//         position="top-center"
+//         autoClose={2000}
+//         hideProgressBar={true}
+//         newestOnTop={true}
+//         closeOnClick
+//         rtl={false}
+//         pauseOnFocusLoss
+//         draggable
+//         pauseOnHover
+//       />
+//     </div>
+//   );
+// }
+
+// export default AddRestaurant;
+
+//double useEffect doubtful code
+
+// import axios from "axios";
+// import React, { useState, useRef, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import Flatpickr from "react-flatpickr";
+// import "flatpickr/dist/themes/light.css";
+// import "./addrestaurant.css";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+// import L from "leaflet";
+// import "leaflet/dist/leaflet.css";
+
+// function AddRestaurant() {
+//   const [data, setData] = useState({
+//     name: "",
+//     email: "",
+//     password: "",
+//     location: "",
+//     phone: "",
+//     openingTime: "",
+//     closingTime: "",
+//     image: "",
+//     menuImages: [],
+//     description: "",
+//     latitude: 27.7172,
+//     longitude: 85.324,
+//   });
+
+//   const navigate = useNavigate();
+//   const mapContainerRef = useRef(null);
+//   const markerRef = useRef(null);
+//   const [map, setMap] = useState(null);
+//   const [marker, setMarker] = useState(null);
+
+//   useEffect(() => {
+//     // Initialize the map
+//     const newMap = L.map(mapContainerRef.current).setView(
+//       [data.latitude, data.longitude],
+//       12
+//     );
+
+//     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+//       attribution: "&copy; OpenStreetMap contributors",
+//     }).addTo(newMap);
+
+//     newMap.on("click", handleMapClick);
+
+//     // Show the marker on initial load
+//     if (data.latitude && data.longitude) {
+//       const newMarker = L.marker([data.latitude, data.longitude]).addTo(newMap);
+//       newMarker.bindPopup("Restaurant location").openPopup();
+//       setMarker(newMarker);
+//     }
+
+//     setMap(newMap);
+
+//     // Cleanup the map when component is unmounted
+//     return () => {
+//       if (newMap) {
+//         newMap.off();
+//         newMap.remove();
+//       }
+//     };
+//   }, []); // Empty dependency array, runs once when mounted
+
+//   useEffect(() => {
+//     // Update map view when coordinates change
+//     if (map) {
+//       map.setView([data.latitude, data.longitude], 12);
+
+//       if (marker) {
+//         marker.setLatLng([data.latitude, data.longitude]);
+//       }
+//     }
+//   }, [data.latitude, data.longitude]); // Dependency on data coordinates
+
+//   const handleMapClick = (event) => {
+//     const { lat, lng } = event.latlng;
+
+//     setData({
+//       ...data,
+//       latitude: lat,
+//       longitude: lng,
+//     });
+
+//     if (marker) {
+//       map.removeLayer(marker);
+//     }
+
+//     // Add a marker to the map at the clicked location
+//     const newMarker = L.marker([lat, lng]).addTo(map);
+//     newMarker.bindPopup("Your restaurant location").openPopup();
+
+//     // Update the marker reference
+//     setMarker(newMarker);
+//   };
+
+//   const handleSubmit = (event) => {
+//     event.preventDefault();
+
+//     const restaurantData = {
+//       name: data.name,
+//       email: data.email,
+//       password: data.password,
+//       location: data.location,
+//       phone: data.phone,
+//       openingTime: data.openingTime,
+//       closingTime: data.closingTime,
+//       description: data.description,
+//       latitude: data.latitude,
+//       longitude: data.longitude,
+//     };
+
+//     const formdata = new FormData();
+//     formdata.append("image", data.image);
+
+//     for (let i = 0; i < data.menuImages.length; i++) {
+//       formdata.append("menuImages", data.menuImages[i]);
+//     }
+
+//     axios
+//       .post("http://localhost:5000/uploadImage", formdata)
+//       .then((res) => {
+//         restaurantData.image = res.data.filename;
+//         restaurantData.menu = res.data.menuFilenames;
+//         return axios.post("http://localhost:5000/create", restaurantData);
+//       })
+//       .then((res) => {
+//         showNotification("Restaurant added successfully!", "success");
+//         setTimeout(() => {
+//           navigate("/dashboard/restaurant");
+//         }, 3500);
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//         showNotification(
+//           "Failed to add restaurant. Please try again.",
+//           "error"
+//         );
+//       });
+//   };
+
+//   return (
+//     <div className="d-flex flex-column align-items-center pt-4">
+//       <h5>Add Restaurant</h5>
+//       <form className="row g-3 w-50" onSubmit={handleSubmit}>
+//         <div className="col-12">
+//           <label htmlFor="inputName" className="form-label">
+//             Name
+//           </label>
+//           <input
+//             type="text"
+//             className="form-control"
+//             id="inputName"
+//             placeholder="Enter Name"
+//             autoComplete="off"
+//             required
+//             onChange={(e) => setData({ ...data, name: e.target.value })}
+//           />
+//         </div>
+//         <div className="col-12">
+//           <label htmlFor="inputEmail4" className="form-label">
+//             Email
+//           </label>
+//           <input
+//             type="email"
+//             className="form-control"
+//             id="inputEmail4"
+//             placeholder="Enter Email"
+//             autoComplete="off"
+//             required
+//             onChange={(e) => setData({ ...data, email: e.target.value })}
+//           />
+//         </div>
+//         <div className="col-12">
+//           <label htmlFor="inputPassword4" className="form-label">
+//             Password
+//           </label>
+//           <input
+//             type="password"
+//             className="form-control"
+//             id="inputPassword4"
+//             placeholder="Enter Password"
+//             required
+//             onChange={(e) => setData({ ...data, password: e.target.value })}
+//           />
+//         </div>
+//         <div className="col-12">
+//           <label htmlFor="inputLocation" className="form-label">
+//             Location
+//           </label>
+//           <input
+//             type="text"
+//             className="form-control"
+//             id="Location"
+//             placeholder="Enter Location"
+//             autoComplete="off"
+//             required
+//             onChange={(e) => setData({ ...data, location: e.target.value })}
+//           />
+//         </div>
+//         <div className="col-12">
+//           <label htmlFor="inputPhoneNumber" className="form-label">
+//             Phone Number
+//           </label>
+//           <input
+//             type="text"
+//             className="form-control"
+//             id="inputPhoneNumber"
+//             placeholder="Enter Phone Number"
+//             autoComplete="off"
+//             required
+//             onChange={(e) => setData({ ...data, phone: e.target.value })}
+//           />
+//         </div>
+//         <div className="col-12">
+//           <div className="row">
+//             <div className="col">
+//               <label htmlFor="inputTime" className="form-label">
+//                 Opening Time
+//               </label>
+//               <Flatpickr
+//                 className="mx-2"
+//                 value={data.openingTime}
+//                 options={{
+//                   enableTime: true,
+//                   noCalendar: true,
+//                   dateFormat: "H:i",
+//                 }}
+//                 onChange={(newValue) =>
+//                   setData({
+//                     ...data,
+//                     openingTime: newValue[0].toLocaleTimeString("en-US", {
+//                       hour12: false,
+//                       hour: "2-digit",
+//                       minute: "2-digit",
+//                     }),
+//                   })
+//                 }
+//                 required
+//               />
+//             </div>
+
+//             <div className="col">
+//               <label htmlFor="inputClosingTime" className="form-label">
+//                 Closing Time
+//               </label>
+//               <Flatpickr
+//                 className="mx-2"
+//                 value={data.closingTime}
+//                 options={{
+//                   enableTime: true,
+//                   noCalendar: true,
+//                   dateFormat: "H:i",
+//                 }}
+//                 onChange={(newValue) =>
+//                   setData({
+//                     ...data,
+//                     closingTime: newValue[0].toLocaleTimeString("en-US", {
+//                       hour12: false,
+//                       hour: "2-digit",
+//                       minute: "2-digit",
+//                     }),
+//                   })
+//                 }
+//                 required
+//               />
+//             </div>
+//           </div>
+//         </div>
+
+//         <div className="col-12 mb-3">
+//           <label className="form-label" htmlFor="inputGroupFile01">
+//             Select Profile Image
+//           </label>
+//           <input
+//             type="file"
+//             className="form-control"
+//             id="inputGroupFile01"
+//             onChange={(e) => setData({ ...data, image: e.target.files[0] })}
+//           />
+//         </div>
+//         <div className="col-12 mb-3">
+//           <label className="form-label" htmlFor="inputMenuFile">
+//             Upload Menu Images (Less than 7 images)
+//           </label>
+//           <input
+//             type="file"
+//             multiple
+//             className="form-control"
+//             id="inputMenuImages"
+//             onChange={(e) => setData({ ...data, menuImages: e.target.files })}
+//           />
+//         </div>
+
+//         <div className="col-12">
+//           <label htmlFor="inputDescription" className="form-label">
+//             Description
+//           </label>
+//           <textarea
+//             className="form-control"
+//             id="inputDescription"
+//             placeholder="Enter Description"
+//             rows="8" // Adjust the number of rows as needed
+//             autoComplete="off"
+//             required
+//             onChange={(e) => setData({ ...data, description: e.target.value })}
+//           />
+//         </div>
+//         <div className="col-12">
+//           <div
+//             id="leaflet-map"
+//             ref={mapContainerRef}
+//             style={{ width: "100%", height: "300px", marginTop: "20px" }}
+//           />
+//         </div>
+//         <div className="col-12">
+//           <button type="submit" className="btn btn-primary mb-4">
+//             Add
+//           </button>
+//         </div>
+//       </form>
+//       <ToastContainer
+//         position="top-center"
+//         autoClose={2000}
+//         hideProgressBar={true}
+//         newestOnTop={true}
+//         closeOnClick
+//         rtl={false}
+//         pauseOnFocusLoss
+//         draggable
+//         pauseOnHover
+//       />
+//     </div>
+//   );
+// }
+
+// export default AddRestaurant;
+
+//no mark feature
+
+// useEffect(() => {
+//   let map;
+
+//   const initializeMap = () => {
+//     if (!map) {
+//       map = L.map(mapContainerRef.current).setView([27.7172, 85.324], 12);
+
+//       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+//         attribution: "&copy; OpenStreetMap contributors",
+//       }).addTo(map);
+
+//       const handleMapClick = (event) => {
+//         const { lat, lng } = event.latlng;
+//         console.log("Clicked coordinates:", [lat, lng]);
+
+//         // Update the latitude and longitude in the state
+//         setData({
+//           ...data,
+//           latitude: lat,
+//           longitude: lng,
+//         });
+
+//         // Remove previous marker if exists
+//         if (markerRef.current) {
+//           map.removeLayer(markerRef.current);
+//         }
+
+//         // Add a marker to the map at the clicked location
+//         const marker = L.marker([lat, lng]).addTo(map);
+
+//         // Add a popup to the marker
+//         marker.bindPopup("Your restaurant location").openPopup();
+
+//         // Save the marker to remove later
+//         markerRef.current = marker;
+//       };
+
+//       map.on("click", handleMapClick);
+//     }
+//   };
+
+//   initializeMap();
+
+//   return () => {
+//     // Clean up the map when the component is unmounted
+//     if (map) {
+//       map.off();
+//       map.remove();
+//     }
+//   };
+// }, [data]);

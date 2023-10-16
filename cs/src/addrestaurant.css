@@ -1,0 +1,17 @@
+/* .ol-attribution {
+    display: none;
+  } */
+
+
+  .custom-marker img {
+    width: 18px;
+    height: 18px;
+  }
+
+
+  .invalid-feedback {
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  
